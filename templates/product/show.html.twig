@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ product.name }}</h1>
+    <p>Prix : {{ product.price }} €</p>
+
+    <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
+
+    {# Affichage du formulaire #}
+    {{ form_start(form) }}
+        {{ form_row(form.size) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {# Message de succès si un produit est ajouté #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <a href="{{ path('app_post') }}">Retour à l'accueil</a>
+{% endblock %}
