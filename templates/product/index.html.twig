@@ -14,17 +14,24 @@
         <button type="submit">Filtrer</button>
     </form>
 
+<div class="featured-products">
     {% for product in products %}
-        <div class="product">
-                {% if product.image %}
-                    <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
-                {% else %}
-                    <p>Aucune image disponible</p>
-                {% endif %}
-                <h2>{{ product.name }}</h2> 
-                <p>Prix : {{ product.price }}€</p>
-                
-                <a href="{{ path('product_show', {id: product.id}) }}">Voir</a>
+            <div class="product-card">
+                <div class="image-container">
+                    {% if product.image %}
+                        <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
+                    {% else %}
+                        <p>Aucune image disponible</p>
+                    {% endif %}
+                </div>
+                <div class="description-product">
+                    <div class="bottom-section">
+                        <h2>{{ product.name }}</h2> 
+                        <p>Prix : {{ product.price }}€</p>
+                    </div>
+                    <a href="{{ path('product_show', {id: product.id}) }}">Voir</a>
+                </div>
+            </div>
             {% else %}
                 <li>Aucun produit ne correspond à cette fourchette de prix.</li>
             {% endfor %}

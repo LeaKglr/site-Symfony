@@ -5,16 +5,28 @@
 {% block body %}
     <h1>Bienvenue sur notre boutique de sweat-shirts !</h1>
 
-    <h2>Produits mis en avant</h2>
-    <div class="product-list">
+    <h2>Nos produits phares :</h2>
+    <div class="featured-products">
         {% for product in products %}
-            <div class="product">
-                <h3>{{ product.name }}</h3>
-                <p>Prix : {{ product.price }} €</p>
-
-                {% if user %}
-                    <a href="{{ path('product_show', { id: product.id }) }}">Voir</a>
-                {% endif %}
+            <div class="product-card">
+                <div class="image-container">
+                    {% if product.image %}
+                        <img src="{{ asset('uploads/' ~ product.image) }}" class="product-image" alt="{{ product.name }}">
+                    {% else %}
+                        <p>Aucune image disponible</p>
+                    {% endif %}
+                </div>
+                <div class="description-product">
+                    <div class="bottom-section">
+                        <div class="name-and-price">
+                            <h3>{{ product.name }}</h3>
+                            <p>Prix : {{ product.price }} €</p>
+                        </div>
+                        {% if user %}
+                            <a href="{{ path('product_show', { id: product.id }) }}" class="btn">Voir</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
