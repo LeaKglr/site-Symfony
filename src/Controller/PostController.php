@@ -10,22 +10,16 @@ use Symfony\Component\Security\Core\Security;
 
 class PostController extends AbstractController
 {
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
     #[Route(path:"/", name: "app_post")]
     public function index(ProductRepository $productRepository): Response
     {
-        $user = $this->security->getUser();
-        $products = $productRepository->findBy([], null, 3);
+        $user = $this->getUser(); // Pas besoin d'injecter Security directement
+        $products = $productRepository->findBy(['id' => [1, 4, 9]]);
 
         return $this->render('post/index.html.twig', [
             'products' => $products,
             'user' => $user,
         ]);
     }
+
 }

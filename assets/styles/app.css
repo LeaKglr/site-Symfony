@@ -1,0 +1,112 @@
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+}
+
+.branding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.branding img {
+    width: 100px; /* Ajuste selon le logo */
+    height: auto;
+}
+
+.branding .slogan {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    margin-top: 5px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: normal;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.featured-products {
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    padding: 20px 0;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 15px;
+    flex: 1;
+    max-width: 30%;
+}
+
+.product-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%; 
+}
+
+.image-container {
+    text-align: center;
+}
+
+.description-product {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: space-between; /* Pour séparer name/price et bouton */
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.name-and-price {
+   margin-left: 50px;
+}
+
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    border : 1px solid black;
+    margin-right: 40px;
+    padding: 10px 50px;
+}
