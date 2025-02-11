@@ -3,21 +3,39 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ product.name }}</h1>
-    <p>Prix : {{ product.price }} €</p>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
+        </div>
+         <div class="product-content">
+            <div class="product-info">
+                <div class="product-details">
+                    <h1>{{ product.name }}</h1>
+                    <p class="product-price">{{ product.price }} €</p>
+                </div>
 
-    <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
+                <div class="product-form">
+                    {{ form_start(form) }}
+                        <label for="{{ form.size.vars.id }}">Taille :</label>
+                        {{ form_widget(form.size) }}
+                </div>
+            </div>
 
-    {# Affichage du formulaire #}
-    {{ form_start(form) }}
-        {{ form_row(form.size) }}
-        {{ form_row(form.submit) }}
-    {{ form_end(form) }}
+            {# Bouton "Ajouter au panier" en dessous #}
+            <div class="add-to-cart">
+                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
 
-    {# Message de succès si un produit est ajouté #}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+            {# Message de succès si un produit est ajouté #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+    </div>
 
-    <a href="{{ path('app_post') }}">Retour à l'accueil</a>
+    <div class="navigation-links">
+        <a href="{{ path('app_post') }}">Retour à l'accueil</a>
+        <a href="{{ path('app_product') }}">Continuer mes achats</a>
+    </div>
 {% endblock %}

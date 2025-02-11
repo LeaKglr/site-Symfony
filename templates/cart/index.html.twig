@@ -36,6 +36,9 @@
 
        <a href="{{ path('stripe_checkout') }}" id="checkout-button" class="btn btn-success">Finaliser ma commande</a>
 
+        <a href="{{ path('app_product') }}">Continuer mes achats</a>
+
+
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe("{{ stripe_public_key }}");
