@@ -21,8 +21,8 @@ class Product
     #[ORM\Column(length: 10)]
     private ?string $size = null;
 
-    #[ORM\Column]
-    private ?float $price = null;
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private ?string $price = null;
 
     #[ORM\Column(length:255)]
     private ?string $image = null;
