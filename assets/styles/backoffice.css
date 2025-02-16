@@ -1,4 +1,4 @@
-/* Back Office Styling */
+/* Back Office */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,27 +9,127 @@ h1 {
     text-align: center;
 }
 
-.product-form {
-    display: flex !important;
-    flex-direction: row !important; /* Force l'affichage horizontal */
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    padding: 0;
-    border: 1px solid #ccc;
-    margin: 0 0 15px 0;
+/* Formulaire d'ajout d'un produit */
+.add-product {
+    background-color: #f8d7da;
+    margin-bottom: 20px;
 }
 
+.formulaire-image {
+    display: flex;
+    align-items: center;
+}
 
+.formulaire-ajout {
+    display: flex;
+    gap: 10px;
+}
+
+.formulaire-produit{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: end;
+}
+
+.formulaire-input {
+    display: flex;
+    margin: 10px;
+}
+
+.btn-add {
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 70px;
+}
+
+/* Affichage des produits déjà présents dans la base de données */
+
+/* Conteneur principal pour chaque produit */
+.admin-product-form {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur pour l'image */
+.image-container {
+    flex: 0 0 120px;
+    margin-right: 20px;
+}
+
+.image-container img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Conteneur pour le formulaire et les boutons */
+.admin-form-product {
+    display: flex;
+    flex-direction: column; /* Les inputs restent en colonne */
+    gap: 10px;
+    align-items: end;
+}
+
+/* Conteneur des champs du formulaire */
 .form-group {
     display: flex;
-    gap: 20px; /* Espacement entre les champs */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .input-container {
     display: flex;
-    flex-direction: column; /* Label au-dessus de l'input */
+    flex-direction: column;
+    flex: 1;
+    min-width: 100px;
+}
+
+.input-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-container input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Les boutons seront alignés sur la même ligne */
+    margin-top: 10px;
+}
+
+.button-group button {
+    width: 48%; /* Évite que les boutons prennent toute la largeur */
+}
+
+
+
+
+
+/*
+.admin-product-form {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-form-product{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: end;
 }
 
 
@@ -48,32 +148,18 @@ h1 {
     object-fit: cover;
 }
 
-/* Ajustement pour les formulaires à l'intérieur */
-.product-form form {
-    gap: 10px;
-}
-
-.product-form input {
-    width: 80px;
-    padding: 5px;
+.form-group {
+    display: flex;
+    margin: 10px;
 }
 
 .button-group {
-    display: flex;
-    justify-content: end;
-    gap: 10px;
-    margin-top: 10px;
-    width: 100%;
-}
-
-.button-group button {
-    padding: 12px 50px;
+    padding: 12px 80px;
     font-size: 16px;
     border: 1px solid black;
     cursor: pointer;
     border-radius: 5px;
+    margin-right: 70px;
 }
 
-.button-group form {
-    display: inline-block;
-}
+*/

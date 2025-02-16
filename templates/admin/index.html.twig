@@ -1,27 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Gestion des Sweat-Shirts</h1>
-    
-    <div class="product-form add-product">
-        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.price) }}
-            {{ form_row(form.image) }}
 
-            <h3>Stock</h3>
-            {{ form_row(form.stock_xs) }}
-            {{ form_row(form.stock_s) }}
-            {{ form_row(form.stock_m) }}
-            {{ form_row(form.stock_l) }}
-            {{ form_row(form.stock_xl) }}
-
-            <button type="submit">Ajouter</button>
-        {{ form_end(form) }}
+    <div class="add-product">
+        {% if form is defined %}
+            {% include 'admin/form.html.twig' %}
+        {% else %}
+            <p>Le formulaire n'est pas disponible.</p>
+        {% endif %}
     </div>
 
     {% for product in products %}
-        <div class="product-form">
+        <div class="admin-product-form">
             <div class="image-container">
                 {% if product.image %}
                     <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
@@ -30,34 +20,35 @@
                 {% endif %}
             </div>
 
-            <form class="formulaire" action="{{ path('admin_product_edit', { id: product.id }) }}" method="post" data-turbo="false">
-                <div class="form-group">
-                    <div class="input-container">
-                        <label for="name_{{ product.id }}">Nom</label>
-                        <input type="text" id="name_{{ product.id }}" name="name" value="{{ product.name }}">
-                    </div>
-                    
-                    <div class="input-container">
-                        <label for="price_{{ product.id }}">Prix</label>
-                        <input type="number" id="price_{{ product.id }}" name="price" value="{{ product.price }}">
-                    </div>
-                    {% for stock in product.stocks %}
-                        <div class="input-container">
-                            <label for="stock_{{ stock.size|lower }}_{{ product.id }}">Stock {{ stock.size|upper }}</label>
-                            <input type="number" id="stock_{{ stock.size|lower }}_{{ product.id }}" name="stock_{{ stock.size|lower }}" value="{{ stock.quantity }}">
-                        </div>
-                    {% endfor %}
-                </div>
-                <button type="submit">MODIFIER</button>
-            </form>
+            <div class="admin-form-product">
 
-            <div class="button-group">
-                    
-                    <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Supprimer ce produit ?');">
-                        <button type="submit">SUPPRIMER</button>
-                    </form>
-                    
-                </div>
+                <form class="formulaire" action="{{ path('admin_product_edit', { id: product.id }) }}" method="post" data-turbo="false">
+                    <div class="form-group">
+                        <div class="input-container">
+                            <label for="name_{{ product.id }}">Nom</label>
+                            <input type="text" id="name_{{ product.id }}" name="name" value="{{ product.name }}">
+                        </div>
+                        
+                        <div class="input-container">
+                            <label for="price_{{ product.id }}">Prix</label>
+                            <input type="number" id="price_{{ product.id }}" name="price" step="0.01" value="{{ product.price }}">
+                        </div>
+                        {% for stock in product.stocks %}
+                            <div class="input-container">
+                                <label for="stock_{{ stock.size|lower }}_{{ product.id }}">Stock {{ stock.size|upper }}</label>
+                                <input type="number" id="stock_{{ stock.size|lower }}_{{ product.id }}" name="stock_{{ stock.size|lower }}" value="{{ stock.quantity }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit">MODIFIER</button>
+                </form>
+
+                <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Supprimer ce produit ?');">
+                    <button type="submit" class="delete-button">SUPPRIMER</button>
+                </form>
+
+            </div>
         </div>
     {% else %}
         <p>Aucun produit trouvé.</p>

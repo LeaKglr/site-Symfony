@@ -1,10 +1,27 @@
-{% extends 'base.html.twig' %}
-
 {% block body %}
-    <h1>{% if form.vars.value.id %}Modifier{% else %}Ajouter{% endif %} un produit</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Enregistrer</button>
+   {{ form_start(form, {'action': path('admin_dashboard'), 'attr': {'enctype': 'multipart/form-data', 'data-turbo': 'false'}}) }}
+
+        <div class="formulaire-ajout">
+            
+            <div class="formulaire-image">
+                {{ form_row(form.image) }}
+            </div>
+
+
+            <div class="formulaire-produit">
+                <div class="formulaire-input">
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.price) }}
+                    {{ form_row(form.stock_xs) }}
+                    {{ form_row(form.stock_s) }}
+                    {{ form_row(form.stock_m) }}
+                    {{ form_row(form.stock_l) }}
+                    {{ form_row(form.stock_xl) }}
+                </div>
+                <button type="submit" class="btn-add">Ajouter</button>
+            </div>        
+            
+        </div>
     {{ form_end(form) }}
-    <a href="{{ path('admin_dashboard') }}">Retour</a>
+
 {% endblock %}

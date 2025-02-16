@@ -7,7 +7,7 @@
         <div class="product-image">
             <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
         </div>
-         <div class="product-content">
+        <div class="product-content">
             <div class="product-info">
                 <div class="product-details">
                     <h1>{{ product.name }}</h1>
@@ -15,24 +15,26 @@
                 </div>
 
                 <div class="product-form">
-                    {{ form_start(form) }}
-                        <label for="{{ form.size.vars.id }}">Taille :</label>
-                        {{ form_widget(form.size) }}
+                    {{ form_start(form, {'action': path('product_show', {'id': product.id}), 'attr': {'data-turbo': 'false'}}) }}
+
+                    <label for="{{ form.size.vars.id }}">Taille :</label>
+                    {{ form_widget(form.size) }}
+
+                    <div class="add-to-cart">
+                        {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+                    </div>
+
+                    {{ form_end(form) }}
                 </div>
             </div>
-
-            {# Bouton "Ajouter au panier" en dessous #}
-            <div class="add-to-cart">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
-                {{ form_end(form) }}
-            </div>
-        </div>
 
             {# Message de succès si un produit est ajouté #}
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">{{ message }}</div>
             {% endfor %}
+        </div>
     </div>
+
 
     <div class="navigation-links">
         <a href="{{ path('app_post') }}">Retour à l'accueil</a>

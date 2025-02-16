@@ -8,8 +8,16 @@
         {% if app.request.get('_route') starts with 'admin_' %}
             <link rel="stylesheet" href="{{ asset('styles/backoffice.css') }}">
         {% endif %}
+        {% if app.request.get('_route') starts with 'cart_' %}
+            <link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+        {% endif %}
+        {% if app.request.attributes.get('_route') == 'app_login' %}
+            <link rel="stylesheet" href="{{ asset('styles/signin.css') }}">
+        {% endif %}
+        {% if app.request.attributes.get('_route') == 'app_register' %}
+            <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+        {% endif %}
         {% endblock %}
-
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
@@ -22,6 +30,10 @@
                 <img src="{{ asset('uploads/logo.png') }}" alt="Logo de l'entreprise">
                 <p class="slogan">Don't compromise on your look</p>
             </div>
+
+        {% if app.request.get('_route') starts with 'admin' %}
+            <h1>Back-Office</h1>
+        {% endif %}
 
             <!-- Liens de navigation -->
             <nav>

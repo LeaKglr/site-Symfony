@@ -7,20 +7,48 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <div class="register-form">
+        <p>S'inscrire</p>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm, {'attr': {'class': 'form-container'}}) }}
+            
+            <div class="form-group">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email) }}
+            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.username) }}
+                {{ form_widget(registrationForm.username) }}
+            </div>
 
-    <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous ici</a></p>
+            <div class="form-group">
+                {{ form_label(registrationForm.address) }}
+                {{ form_widget(registrationForm.address) }}
+            </div>
 
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword.first) }}
+                {{ form_widget(registrationForm.plainPassword.first) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword.second) }}
+                {{ form_widget(registrationForm.plainPassword.second) }}
+            </div>
+            
+
+            <button type="submit" class="btn">Créer un compte</button>
+        {{ form_end(registrationForm) }}
+
+        <p class="signin">Déjà inscrit ? 
+            <br>
+            <button class="btn">
+                <a class="register" href="{{ path('app_login') }}">Se Connecter</a>
+            </button>
+        </p>
+    </div>
+    </div>
 {% endblock %}

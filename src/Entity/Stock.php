@@ -13,13 +13,13 @@ class Stock
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $size = null;
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    private string $size = "";
 
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'stocks')]
+    #[ORM\ManyToOne(inversedBy: 'stocks', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 
