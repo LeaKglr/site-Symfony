@@ -81,9 +81,11 @@ final class ProductController extends AbstractController
                 'name' => $product->getName(),
                 'size' => $selectedSize,
                 'price' => $product->getPrice(),
+                'image' => $product->getImage(),
             ];
 
             $session->set('cart', $cart);
+            $session->save();
 
             // Redirection avec message de succès
             $this->addFlash('success', 'Produit ajouté au panier !');

@@ -18,8 +18,8 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $size = null;
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    private string $size = "";
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private ?string $price = null;
@@ -30,7 +30,7 @@ class Product
     /**
      * @var Collection<int, Stock>
      */
-    #[ORM\OneToMany(targetEntity: Stock::class, mappedBy: 'product', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Stock::class, mappedBy: 'product', cascade: ['persist'], orphanRemoval: true)]
     private Collection $stocks;
 
     public function __construct()
@@ -98,7 +98,7 @@ class Product
         return $this->stocks;
     }
 
-    public function addStock(Stock $stock): static
+    public function addStock(Stock $stock): self
     {
         if (!$this->stocks->contains($stock)) {
             $this->stocks->add($stock);
