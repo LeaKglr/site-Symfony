@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProductType extends AbstractType
 {
@@ -18,36 +19,43 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('price', TextType::class, [
-                'label' => 'Prix'
-            ])
-            ->add('image', FileType::class, [
-                'mapped' => false, // Important : ne pas lier à l'entité directement
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Merci d\'uploader une image valide (JPEG ou PNG)',
-                    ])
-                ],
+                'label' => 'Prix',
+                'attr' => ['class' => 'form-control', 'step' => '0.01']
             ])
             ->add('stock_xs', IntegerType::class, ['mapped' => false, 'label' => 'Stock XS'])
             ->add('stock_s', IntegerType::class, ['mapped' => false, 'label' => 'Stock S'])
             ->add('stock_m', IntegerType::class, ['mapped' => false, 'label' => 'Stock M'])
             ->add('stock_l', IntegerType::class, ['mapped' => false, 'label' => 'Stock L'])
             ->add('stock_xl', IntegerType::class, ['mapped' => false, 'label' => 'Stock XL']);
+            
+            if (!$options['is_edit']) {
+                $builder->add('imageFile', FileType::class, [
+                    'mapped' => false, // Important : ne pas lier à l'entité directement
+                    'required' => false,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '2M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/jpg',
+                            ],
+                            'mimeTypesMessage' => 'Merci d\'uploader une image valide (JPEG ou PNG)',
+                        ])
+                    ],
+                ]);
+            };
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
+            'is_edit' => false,
         ]);
     }
 }

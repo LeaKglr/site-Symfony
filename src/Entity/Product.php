@@ -86,7 +86,7 @@ class Product
 
     public function setImage(?string $image): static
     {
-        $this->image = $image;
+        $this->image = $image ?: $this->image;
         return $this;
     }
 
@@ -107,6 +107,17 @@ class Product
 
         return $this;
     }
+
+    public function getStockForSize(string $size): ?Stock
+    {
+        foreach ($this->stocks as $stock) {
+            if (strtoupper($stock->getSize()) === strtoupper($size)) {
+                return $stock;
+            }
+        }
+        return null;
+    }
+
 
     public function removeStock(Stock $stock): static
     {
