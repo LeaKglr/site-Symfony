@@ -11,47 +11,39 @@
     </div>
 
     {% for product in products %}
-        <div class="admin-product-form">
-            <div class="image-container">
-                {% if product.image %}
-                    <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
-                {% else %}
-                    <p>Aucune image</p>
-                {% endif %}
-            </div>
+        <div class="edit-product">
+            {% if editForms[product.id] is defined %}
 
-            <div class="admin-form-product">
 
-                <form class="formulaire" action="{{ path('admin_product_edit', { id: product.id }) }}" method="post" data-turbo="false">
-                    <div class="form-group">
-                        <div class="input-container">
-                            <label for="name_{{ product.id }}">Nom</label>
-                            <input type="text" id="name_{{ product.id }}" name="name" value="{{ product.name }}">
-                        </div>
-                        
-                        <div class="input-container">
-                            <label for="price_{{ product.id }}">Prix</label>
-                            <input type="number" id="price_{{ product.id }}" name="price" step="0.01" value="{{ product.price }}">
-                        </div>
-                        {% for stock in product.stocks %}
-                            <div class="input-container">
-                                <label for="stock_{{ stock.size|lower }}_{{ product.id }}">Stock {{ stock.size|upper }}</label>
-                                <input type="number" id="stock_{{ stock.size|lower }}_{{ product.id }}" name="stock_{{ stock.size|lower }}" value="{{ stock.quantity }}">
-                            </div>
-                        {% endfor %}
+                {{ form_start(editForms[product.id], {'action': path('admin_product_edit', {id: product.id}), 'attr': {'enctype': 'multipart/form-data'}}) }}
+                    
+                    <div>
+                        {% if product.image %}
+                            <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
+                        {% else %}
+                            <p>Aucune image</p>
+                        {% endif %}
                     </div>
+                    
+                    {{ form_row(editForms[product.id].name) }}
+                    {{ form_row(editForms[product.id].price) }}
 
-                    <button type="submit">MODIFIER</button>
-                </form>
+                    {{ form_row(editForms[product.id].stock_xs) }}
+                    {{ form_row(editForms[product.id].stock_s) }}
+                    {{ form_row(editForms[product.id].stock_m) }}
+                    {{ form_row(editForms[product.id].stock_l) }}
+                    {{ form_row(editForms[product.id].stock_xl) }}
 
-                <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Supprimer ce produit ?');">
-                    <button type="submit" class="delete-button">SUPPRIMER</button>
-                </form>
-
-            </div>
+                    <button type="submit">Modifier</button>
+                {{ form_end(editForms[product.id]) }}
+            {% else %}
+                <p>Le formulaire d'édition n'est pas disponible.</p>
+            {% endif %}
         </div>
-    {% else %}
-        <p>Aucun produit trouvé.</p>
+
+        <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Supprimer ce produit ?');">
+            <button type="submit" class="delete-button">SUPPRIMER</button>
+        </form>
     {% endfor %}
 {% endblock %}
 
