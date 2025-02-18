@@ -1,0 +1,44 @@
+
+    {% if product is defined %}
+
+        {% if editForms[product.id] is defined %}
+            
+                {{ form_start(editForms[product.id], {'action': path('admin_product_edit', {id: product.id}), 'attr': {'enctype': 'multipart/form-data'}}) }}
+                   
+                    <div class="image-stock">
+                        {% if product.image %}
+                            <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
+                        {% else %}
+                            <p>Aucune image</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-button">
+                        <div class="form-row">
+                            {{ form_row(editForms[product.id].name) }}
+                            {{ form_row(editForms[product.id].price) }}
+                            
+                            {{ form_row(editForms[product.id].stock_xs) }}
+                            {{ form_row(editForms[product.id].stock_s) }}
+                            {{ form_row(editForms[product.id].stock_m) }}
+                            {{ form_row(editForms[product.id].stock_l) }}
+                            {{ form_row(editForms[product.id].stock_xl) }}
+                        </div>
+
+                        <!-- Conteneur pour aligner les boutons -->
+                        <div class="action-buttons">
+                            <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Supprimer ce produit ?');">
+                                <button type="submit" class="delete-button">Supprimer</button>
+                            </form>
+
+                            <button type="submit" class="update-button">Modifier</button>                       
+                        </div>
+                    </div>
+                    
+                {{ form_end(editForms[product.id]) }}
+        {% else %}
+                <p>Le formulaire d'édition n'est pas disponible.</p>
+            
+        {% endif %}
+
+    {% endif %}

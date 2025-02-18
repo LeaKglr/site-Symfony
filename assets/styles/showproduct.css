@@ -1,0 +1,115 @@
+/* Centrer le contenu principal */
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; /* Espace entre l'image et le contenu */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Image du produit */
+.product-image img {
+    width: 400px; /* Ajuste la taille de l'image */
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Conteneur du contenu */
+.product-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Informations sur le produit */
+.product-info {
+    display: flex;
+    flex-direction: column; /* Empile les éléments en colonne */
+    gap: 20px; /* Espacement entre les blocs */
+}
+
+/* Détails du produit */
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-and-size form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Sélection de la taille */
+.product-form label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-form select {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+/* Bouton d'ajout au panier */
+.add-to-cart {
+    margin-top: 20px;
+}
+
+.info-and-size {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.add-to-cart .btn {
+    color: black;
+    border: 1px solid black;
+    padding: 12px 60px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 8px;
+    margin-top: 70px;
+}
+
+.add-to-cart .btn:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.navigation-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navigation-links a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+}

@@ -121,19 +121,39 @@ public function edit(ProductRepository $productRepository, int $id, Request $req
     $editForm->handleRequest($request);
 
     if ($editForm->isSubmitted() && $editForm->isValid()) {
-        // ✅ Mise à jour des valeurs du produit
         $product->setName($editForm->get('name')->getData());
         $product->setPrice($editForm->get('price')->getData());
 
-
-        // ✅ Mise à jour des stocks
-        foreach ($product->getStocks() as $stock) {
-            $sizeKey = 'stock_' . strtolower($stock->getSize()); // Ex: stock_xs
-            if ($request->request->has($sizeKey)) {
-                $stock->setQuantity((int) $request->request->get($sizeKey));
+        // ✅ Mise à jour des stocks (ajout/modification)
+        $sizes = ['xs', 's', 'm', 'l', 'xl'];
+        foreach ($sizes as $size) {
+            $sizeKey = 'stock_' . $size;
+            $newQuantity = (int) $editForm->get($sizeKey)->getData();
+            
+            dump($sizeKey, $newQuantity); // Ajoute ce dump pour voir ce qui est récupéré
+        
+            // Vérifie si le stock existe déjà
+            $existingStock = null;
+            foreach ($product->getStocks() as $stock) {
+                if (strtolower($stock->getSize()) === $size) {
+                    $existingStock = $stock;
+                    break;
+                }
+            }
+        
+            // Mise à jour ou création du stock
+            if ($existingStock) {
+                $existingStock->setQuantity($newQuantity);
+            } else {
+                $newStock = new Stock();
+                $newStock->setSize(strtoupper($size));
+                $newStock->setQuantity($newQuantity);
+                $product->addStock($newStock);
+                $entityManager->persist($newStock);
             }
         }
 
+        $entityManager->persist($product);
         $entityManager->flush();
 
         $this->addFlash('success', 'Produit mis à jour avec succès !');
@@ -149,7 +169,7 @@ public function edit(ProductRepository $productRepository, int $id, Request $req
 
 
 
-    #[Route('/delete/{id}', name: 'admin_product_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'admin_product_delete', methods: ['GET'])]
     public function delete(Product $product, EntityManagerInterface $em): Response
     {
         $em->remove($product);

@@ -11,8 +11,22 @@ h1 {
 
 /* Formulaire d'ajout d'un produit */
 .add-product {
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-container-ajout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
     background-color: #f8d7da;
-    margin-bottom: 20px;
+    max-width: 1000px;
 }
 
 .formulaire-image {
@@ -20,24 +34,9 @@ h1 {
     align-items: center;
 }
 
-.formulaire-ajout {
-    display: flex;
-    gap: 10px;
-}
-
-.formulaire-produit{
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    align-items: end;
-}
-
-.formulaire-input {
-    display: flex;
-    margin: 10px;
-}
 
 .btn-add {
+    margin-top: 20px;
     padding: 12px 80px;
     font-size: 16px;
     border: 1px solid black;
@@ -48,7 +47,138 @@ h1 {
 
 /* Affichage des produits déjà présents dans la base de données */
 
-/* Conteneur principal pour chaque produit */
+.edit-product {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+/* Conteneur du produit */
+.product-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+/* Champs du formulaire */
+.form-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+/* Alignement des inputs */
+.form-fields {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-fields input {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 100px;
+    text-align: center;
+}
+
+.form-fields div {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Alignement de la suppression */
+.delete-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-group {
+    margin-top: 20px;
+}
+
+.btn-add {
+    text-transform: uppercase;
+}
+
+#product_imageFile {
+    max-width: 120px;
+}
+
+/* Bouton Modifier */
+.update-button {
+    flex: 1; 
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+/* Bouton Supprimer */
+.delete-button {
+    flex: 1; 
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+}
+
+.image-stock {
+    flex: 0 0 120px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.image-stock img {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.image-stock div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* S'assurer que les boutons ont une taille uniforme */
+/*
+.update-button, .delete-button {
+    flex: 1;  Prendre un espace égal 
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+*/
+
+/* Conteneur principal pour chaque produit 
 .admin-product-form {
     display: flex;
     align-items: center;
@@ -58,8 +188,8 @@ h1 {
     margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-/* Conteneur pour l'image */
+*/
+/* Conteneur pour l'image 
 .image-container {
     flex: 0 0 120px;
     margin-right: 20px;
@@ -71,16 +201,16 @@ h1 {
     object-fit: cover;
     border-radius: 5px;
 }
-
-/* Conteneur pour le formulaire et les boutons */
+*/
+/* Conteneur pour le formulaire et les boutons 
 .admin-form-product {
     display: flex;
-    flex-direction: column; /* Les inputs restent en colonne */
+    flex-direction: column;
     gap: 10px;
     align-items: end;
 }
-
-/* Conteneur des champs du formulaire */
+*/
+/* Conteneur des champs du formulaire 
 .form-group {
     display: flex;
     flex-wrap: wrap;
@@ -107,16 +237,16 @@ h1 {
 
 .button-group {
     display: flex;
-    justify-content: space-between; /* Les boutons seront alignés sur la même ligne */
+    justify-content: space-between; 
     margin-top: 10px;
 }
 
 .button-group button {
-    width: 48%; /* Évite que les boutons prennent toute la largeur */
+    width: 48%; 
 }
 
 
-
+*/
 
 
 /*

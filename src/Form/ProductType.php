@@ -36,6 +36,7 @@ class ProductType extends AbstractType
                 $builder->add('imageFile', FileType::class, [
                     'mapped' => false, // Important : ne pas lier à l'entité directement
                     'required' => false,
+                    'label' => 'Choisir une image',
                     'constraints' => [
                         new File([
                             'maxSize' => '2M',

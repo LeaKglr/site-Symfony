@@ -1,15 +1,18 @@
 {% block body %}
    {{ form_start(form, {'action': path('admin_dashboard'), 'attr': {'enctype': 'multipart/form-data', 'data-turbo': 'false'}}) }}
 
-        <div class="formulaire-ajout">
+        <div class="product-container-ajout">
             
-            <div class="formulaire-image">
-                {{ form_row(form.imageFile) }}
+            <div class="image-stock">
+                <label>{{ form_label(form.imageFile) }}</label>
+                <div>
+                    {{ form_widget(form.imageFile) }}
+                </div>
             </div>
 
 
-            <div class="formulaire-produit">
-                <div class="formulaire-input">
+            <div class="form-content">
+                <div class="form-fields">
                     {{ form_row(form.name) }}
                     {{ form_row(form.price) }}
                     {{ form_row(form.stock_xs) }}
