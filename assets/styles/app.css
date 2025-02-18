@@ -52,6 +52,7 @@ footer {
     color: white;
     padding: 20px 0;
     text-align: center;
+    margin-top: 50px;
 }
 
 /* Conteneur des produits */
@@ -74,6 +75,7 @@ footer {
     text-align: center;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     width: 300px; /* Taille des cartes */
+    margin-bottom: 20px;
 }
 
 /* Image du produit */
@@ -104,4 +106,16 @@ footer {
     color: black;
     border: 1px solid black;
     text-transform: uppercase;
+}
+
+.btn-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    padding: 12px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
 }

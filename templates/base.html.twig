@@ -17,6 +17,9 @@
         {% if app.request.attributes.get('_route') == 'app_register' %}
             <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
         {% endif %}
+        {% if app.request.attributes.get('_route') == 'product_show' %}
+            <link rel="stylesheet" href="{{ asset('styles/showproduct.css') }}">
+        {% endif %}
         {% endblock %}
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -37,18 +40,25 @@
 
             <!-- Liens de navigation -->
             <nav>
-                <ul>
-                    <li><a href="{{ path('app_post') }}" class="{% if app.request.get('_route') == 'app_post' %}active{% endif %}">Accueil</a></li>
-                    {% if not app.user %}
-                        <li><a href="{{ path('app_register') }}" class="{% if app.request.get('_route') == 'app_register' %}active{% endif %}">S'inscrire</a></li>
-                        <li><a href="{{ path('app_login') }}" class="{% if app.request.get('_route') == 'app_login' %}active{% endif %}">Se Connecter</a></li>
-                    {% else %}
-                        <li><a href="{{ path('app_product') }}" class="{% if app.request.get('_route') == 'app_product' %}active{% endif %}">Boutique</a></li>
-                        <li><a href="{{ path('cart_show') }}" class="{% if app.request.get('_route') == 'cart_show' %}active{% endif %}">Panier</a></li>
-                        <li><a href="{{ path('app_logout') }}">Se Déconnecter</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
+        <ul>
+            {% if app.request.get('_route') starts with 'admin' %}
+                <!-- Si on est dans le back-office -->
+                <li><a href="{{ path('app_product') }}" class="{% if app.request.get('_route') == 'app_product' %}active{% endif %}">Boutique</a></li>
+                <li><a href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+            {% else %}
+                <!-- Si on est sur le site normal -->
+                <li><a href="{{ path('app_post') }}" class="{% if app.request.get('_route') == 'app_post' %}active{% endif %}">Accueil</a></li>
+                {% if not app.user %}
+                    <li><a href="{{ path('app_register') }}" class="{% if app.request.get('_route') == 'app_register' %}active{% endif %}">S'inscrire</a></li>
+                    <li><a href="{{ path('app_login') }}" class="{% if app.request.get('_route') == 'app_login' %}active{% endif %}">Se Connecter</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_product') }}" class="{% if app.request.get('_route') == 'app_product' %}active{% endif %}">Boutique</a></li>
+                    <li><a href="{{ path('cart_show') }}" class="{% if app.request.get('_route') == 'cart_show' %}active{% endif %}">Panier</a></li>
+                    <li><a href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
         </div>
     </header>
         {% block body %}{% endblock %}
