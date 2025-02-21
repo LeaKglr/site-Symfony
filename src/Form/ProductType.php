@@ -7,11 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProductType extends AbstractType
 {
@@ -34,7 +32,7 @@ class ProductType extends AbstractType
             
             if (!$options['is_edit']) {
                 $builder->add('imageFile', FileType::class, [
-                    'mapped' => false, // Important : ne pas lier à l'entité directement
+                    'mapped' => false,
                     'required' => false,
                     'label' => 'Choisir une image',
                     'constraints' => [

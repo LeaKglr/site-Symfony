@@ -20,7 +20,7 @@
                             <p><strong>Taille :</strong> {{ item.size }}</p>
                         </div>
                         <div class="cart-item-details-btn">
-                            <a href="{{ path('cart_remove', { index: index }) }}" class="btn btn-retirer">Retirer du panier</a>
+                            <a href="{{ path('cart_remove', { index: index }) }}" class="btn-retirer">Retirer du panier</a>
                         </div>
                     </div>
                 </div>
@@ -29,15 +29,13 @@
             <div class="cart-summary">
                 <div class="cart-total">
                     <p>TOTAL : <strong>{{ total }} €</strong></p>
-                    <a href="{{ path('stripe_checkout') }}" class="btn btn-danger">Finaliser ma commande</a>
+                    <a href="{{ path('stripe_checkout') }}" class="btn-danger">Finaliser ma commande</a>
                 </div>
                 <div class="cart-buttons">
-                    <a href="{{ path('app_product') }}" class="btn btn-success">Continuer mes achats</a>
+                    <a href="{{ path('app_product') }}" class="btn-success">Continuer mes achats</a>
                 </div>
             </div>
         </div>
-
-        
 
 
 <script src="https://js.stripe.com/v3/"></script>

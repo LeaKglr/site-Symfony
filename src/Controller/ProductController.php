@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 final class ProductController extends AbstractController
 {
+    // Page de tous les produits
     #[Route('/products', name: 'app_product')]
     public function index(Request $request, ProductRepository $productRepository): Response
     {
@@ -20,6 +20,7 @@ final class ProductController extends AbstractController
 
     $queryBuilder = $productRepository->createQueryBuilder('p');
 
+    // Filtre pour le prix 
     if ($priceRange === '10-29') {
         $queryBuilder->andWhere('p.price BETWEEN :min AND :max')
                      ->setParameter('min', 10)
@@ -42,6 +43,7 @@ final class ProductController extends AbstractController
     ]);
     }
 
+    // Page pour un produit en particulier grâge à son ID
     #[Route('/product/{id}', name: 'product_show', requirements: ['id' => '\d+'])]
     public function show(int $id, ProductRepository $productRepository, Request $request): Response
     {
@@ -59,7 +61,7 @@ final class ProductController extends AbstractController
             ->add('size', ChoiceType::class, [
                 'choices' => $sizes,
                 'label' => 'Choisir une taille',
-                'expanded' => false, // Menu déroulant
+                'expanded' => false,
                 'multiple' => false,
             ])
             ->add('submit', SubmitType::class, ['label' => 'Ajouter au panier'])
@@ -68,14 +70,14 @@ final class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Récupérer la taille sélectionnée
+            // Récupère la taille sélectionnée
             $selectedSize = $form->get('size')->getData();
 
-            // Récupérer ou initialiser le panier en session
+            // Récupère ou initialise le panier en session
             $session = $request->getSession();
             $cart = $session->get('cart', []);
 
-            // Ajouter le produit au panier
+            // Ajoute le produit au panier
             $cart[] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),

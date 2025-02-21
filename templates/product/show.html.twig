@@ -4,50 +4,38 @@
 
 {% block body %}
     <div class="product-container">
-    <!-- Image du produit -->
-    <div class="product-image">
-        <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
-    </div>
+        <div class="product-image">
+            <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}" width="300">
+        </div>
 
-    <!-- Contenu du produit -->
-    <div class="product-content">
-    <div class="product-info">
-        <!-- Bloc contenant le nom/prix et la sélection de taille -->
-        <div class="info-and-size">
-            <!-- Détails du produit (Nom + Prix) -->
-            <div class="product-details">
-                <h1>{{ product.name }}</h1>
-                <p class="product-price">{{ product.price }} €</p>
+        <div class="product-content">
+            <div class="product-info">
+                <div class="info-and-size">
+                    <div class="product-details">
+                        <h1>{{ product.name }}</h1>
+                        <p class="product-price">{{ product.price }} €</p>
+                    </div>
+
+                    {{ form_start(form, {'action': path('product_show', {'id': product.id}), 'method': 'POST'}) }}
+
+                    <div class="product-form">
+                        <label for="{{ form.size.vars.id }}">Taille :</label>
+                        {{ form_widget(form.size) }}
+                    </div>
+
+                    <div class="add-to-cart">
+                        {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
             </div>
 
-            <!-- Formulaire d'ajout au panier (incluant la taille) -->
-            {{ form_start(form, {'action': path('product_show', {'id': product.id}), 'method': 'POST'}) }}
-
-            <div class="product-form">
-                <label for="{{ form.size.vars.id }}">Taille :</label>
-                {{ form_widget(form.size) }}
-            </div>
-
-            <!-- Bouton Ajouter au panier en dessous -->
-            <div class="add-to-cart">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
-            </div>
-
-            {{ form_end(form) }}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
         </div>
     </div>
-
-    {# Message de succès si un produit est ajouté #}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
-</div>
-
-</div>
-
-
-
-
     <div class="navigation-links">
         <a href="{{ path('app_post') }}">Retour à l'accueil</a>
         <a href="{{ path('app_product') }}">Continuer mes achats</a>

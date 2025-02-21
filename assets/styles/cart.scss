@@ -1,0 +1,128 @@
+// Mixins strictement basés sur ton code
+@mixin flex($direction, $align: stretch, $justify: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
+}
+
+@mixin button-style($bg-color, $text-color, $border) {
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $text-color;
+    background-color: $bg-color;
+    border: $border;
+}
+
+// Conteneur principal du panier
+.cart-container {
+    @include flex(column, stretch, flex-start, 20px);
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+// Élément du panier
+.cart-item {
+    @include flex(row, center, space-between);
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+// Image produit
+.cart-item-image img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+// Détails du produit
+.cart-item-details {
+    @include flex(column);
+    flex-grow: 1;
+    margin-left: 40px;
+}
+
+.cart-item-details-btn {
+    @include flex(column, end);
+}
+
+.cart-item-details-p {
+    @include flex(row, center, space-between);
+}
+
+// Résumé du panier
+.cart-summary {
+    @include flex(column, end, flex-start, 10px);
+}
+
+// Total
+.cart-total {
+    @include flex(row, center, flex-start, 10px);
+    font-size: 15px;
+
+    p {
+        font-weight: bold;
+        border: 1px solid black;
+        padding: 12px 20px;
+    }
+}
+
+// Boutons
+.cart-buttons {
+    @include flex(column, center, center, 15px);
+    text-align: center;
+}
+
+.cart-buttons .btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.btn-retirer {
+    @include button-style(white, black, 1px solid black);
+    margin-top: 20px;
+}
+
+.btn-danger {
+    @include button-style(#f08080, black, none);
+}
+
+.btn-success {
+    @include button-style(#4caf50, black, none);
+}
+
+// Media Queries (version mobile)
+@media (max-width: 768px) {
+    .cart-item {
+        @include flex(column, center);
+        padding: 10px;
+        text-align: center;
+    }
+
+    .cart-item-details {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .cart-summary {
+        align-items: center;
+        width: 100%;
+    }
+
+    .cart-total {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cart-buttons {
+        width: 100%;
+    }
+}
+
+

@@ -1,0 +1,90 @@
+// Mixins
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin box($padding, $margin: 0 auto) {
+    padding: $padding;
+    margin: $margin;
+}
+
+@mixin button-style($bg-color, $text-color, $padding, $font-size) {
+    padding: $padding;
+    font-size: $font-size;
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+// Formulaire principal
+form {
+    @include flex(column, center, center);
+}
+
+// Formulaire de connexion
+.signin {
+    @include flex(column, flex-start, flex-start);
+    @include box(10px);
+    border: 1px solid black;
+    padding: 10px;
+}
+
+// Labels
+label {
+    margin-top: 10px;
+}
+
+// Inputs
+input {
+    margin: 5px 0;
+}
+
+// Bouton principal
+.btn {
+    @include button-style(#89CFF0, white, 10px 15px, large);
+    margin-top: 10px;
+}
+
+// Lien d'inscription
+.register {
+    color: white;
+}
+
+// Lien général
+a {
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+// Lien "Mot de passe oublié"
+.forget {
+    text-decoration: underline;
+    color: #6879D0;
+}
+
+// Media Queries pour mobile
+@media (max-width: 768px) {
+    form {
+        padding: 10px;
+    }
+
+    .signin {
+        padding: 10px;
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

@@ -122,7 +122,6 @@ class Product
     public function removeStock(Stock $stock): static
     {
         if ($this->stocks->removeElement($stock)) {
-            // set the owning side to null (unless already changed)
             if ($stock->getProduct() === $this) {
                 $stock->setProduct(null);
             }

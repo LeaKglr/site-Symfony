@@ -1,0 +1,203 @@
+/* Back Office */
+
+// Mixin pour les boutons
+@mixin button-style($bg-color: white, $text-color: black) {
+    padding: 12px 40px;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: $bg-color;
+    color: $text-color;
+}
+
+// Mixin pour les conteneurs
+@mixin container-style($bg-color: #f8d7da, $max-width: 1000px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: $bg-color;
+    max-width: $max-width;
+}
+
+// Mixin pour les champs de formulaire
+@mixin form-input {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 100px;
+    text-align: center;
+}
+
+// Styles généraux
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+
+// Formulaire d'ajout d'un produit
+.add-product {
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-container-ajout {
+    @include container-style();
+}
+
+.formulaire-image {
+    display: flex;
+    align-items: center;
+}
+
+.btn-add {
+    @include button-style();
+    margin-top: 20px;
+    margin-right: 70px;
+}
+
+
+// Affichage des produits existants
+.edit-product {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.product-container {
+    @include container-style($bg-color: #ffffff);
+}
+
+.form-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    
+}
+
+.form-fields {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    input {
+        @include form-input;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.delete-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-group {
+    margin-top: 20px;
+}
+
+#product_imageFile {
+    max-width: 120px;
+}
+
+// Boutons de gestion
+.update-button {
+    @include button-style($bg-color: white);
+    flex: 1;
+}
+
+.delete-button {
+    @include button-style($bg-color: white);
+    flex: 1;
+    text-decoration: none;
+}
+
+// Image produit
+.image-stock {
+    flex: 0 0 120px;
+    margin-right: 20px;
+    text-align: center;
+
+    img {
+        width: 120px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+// Media Queries pour la responsivité
+
+// Tablettes (max 768px)
+@media (max-width: 768px) {
+    .product-container-ajout, .product-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .btn-add, .update-button, .delete-button {
+        padding: 10px 20px;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .form-fields input {
+        width: 80px;
+    }
+}
+
+// Mobiles (max 480px)
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .product-container-ajout, .products-container {
+        padding: 5px;
+    }
+
+    .form-fields {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-add, .update-button, .delete-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

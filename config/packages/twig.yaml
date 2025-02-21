@@ -2,6 +2,9 @@ twig:
     file_name_pattern: '*.twig'
     globals:
         stripe_public_key: '%env(STRIPE_PUBLIC_KEY)%'
+    paths:
+        '%kernel.project_dir%/public': ~
+        '%kernel.project_dir%/public/docs': docs
 
 when@test:
     twig:
