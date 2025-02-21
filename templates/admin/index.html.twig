@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
     <div class="add-product">
         {% if form is defined %}
             {% include 'admin/form.html.twig' %}
@@ -10,13 +9,11 @@
         {% endif %}
     </div>
 
-<div class="edit-product">
-    {% for product in products %}
-        {% if editForms[product.id] is defined %}
-            
+    <div class="edit-product">
+        {% for product in products %}
+            {% if editForms[product.id] is defined %}
                 {{ form_start(editForms[product.id], {'action': path('admin_product_edit', {id: product.id}), 'attr': {'enctype': 'multipart/form-data'}}) }}
-                   
-                   <div class="product-container">
+                    <div class="product-container">
                         <div class="image-stock">
                             {% if product.image %}
                                 <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
@@ -35,26 +32,18 @@
                                 {{ form_row(editForms[product.id].stock_m) }}
                                 {{ form_row(editForms[product.id].stock_l) }}
                                 {{ form_row(editForms[product.id].stock_xl) }}
-                              </div>  
-
-                                <!-- Conteneur pour aligner les boutons -->
-                                <div class="button-group">         
-                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn delete-button" onclick="return confirm('Supprimer ce produit ?');">Supprimer</a>
-                                    <button type="submit" class="btn update-button">Modifier</button>
-                                </div>
-                            
+                            </div>  
+                            <div class="button-group">         
+                                <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="delete-button" onclick="return confirm('Supprimer ce produit ?');">Supprimer</a>
+                                <button type="submit" class="update-button">Modifier</button>
+                            </div>  
                         </div>
                     </div>
-                    
                 {{ form_end(editForms[product.id]) }}        
-        {% else %}
+            {% else %}
                 <p>Le formulaire d'édition n'est pas disponible.</p>
-            
-        {% endif %}
-
-        
-
-    {% endfor %}
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}
 

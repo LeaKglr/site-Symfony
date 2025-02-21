@@ -13,8 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Entity\Stock;
 
-
-
+// Backoffice
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
@@ -30,13 +29,13 @@ public function index(ProductRepository $productRepository, Request $request, En
 {
     set_time_limit(300);
 
-    // ✅ Création d'un nouveau produit
+    // Création d'un nouveau produit
     $product = new Product();
     $form = $this->createForm(ProductType::class, $product);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        // ✅ Gestion de l'image
+        // Gestion de l'image
         $imageFile = $form->get('imageFile')->getData();
         if ($imageFile) {
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -50,7 +49,7 @@ public function index(ProductRepository $productRepository, Request $request, En
 
         $em->persist($product);
 
-        // ✅ Ajout des stocks
+        // Ajout des stocks
         $sizes = ['xs', 's', 'm', 'l', 'xl'];
         foreach ($sizes as $size) {
             $stockQuantity = $form->get("stock_$size")->getData();
@@ -67,17 +66,17 @@ public function index(ProductRepository $productRepository, Request $request, En
         return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
     }
 
-    // ✅ Récupération des produits pour l'affichage
+    // Récupération des produits pour l'affichage
     $products = $productRepository->findAll();
     $editForms = [];
 
     foreach ($products as $product) {
-        // 🟢 Création du formulaire d'édition
+        // Création du formulaire d'édition
         $editForm = $this->createForm(ProductType::class, $product, [
             'is_edit' => true, // Empêche l'affichage de l'input image
         ]);
 
-        // 🟢 Remplir les champs de stock avec les valeurs actuelles
+        // Remplir les champs de stock avec les valeurs actuelles
         foreach ($product->getStocks() as $stock) {
             $sizeKey = 'stock_' . strtolower($stock->getSize()); // stock_xs, stock_s, etc.
             
@@ -106,10 +105,10 @@ public function edit(ProductRepository $productRepository, int $id, Request $req
         throw $this->createNotFoundException("Produit non trouvé");
     }
 
-    // ✅ Création du formulaire
+    // Création du formulaire
     $editForm = $this->createForm(ProductType::class, $product);
 
-    // ✅ Remplir les champs de stock avec les valeurs actuelles
+    // Remplir les champs de stock avec les valeurs actuelles
     foreach ($product->getStocks() as $stock) {
         $sizeKey = 'stock_' . strtolower($stock->getSize()); // stock_xs, stock_s, etc.
         
@@ -124,13 +123,11 @@ public function edit(ProductRepository $productRepository, int $id, Request $req
         $product->setName($editForm->get('name')->getData());
         $product->setPrice($editForm->get('price')->getData());
 
-        // ✅ Mise à jour des stocks (ajout/modification)
+        // Mise à jour des stocks (ajout/modification)
         $sizes = ['xs', 's', 'm', 'l', 'xl'];
         foreach ($sizes as $size) {
             $sizeKey = 'stock_' . $size;
             $newQuantity = (int) $editForm->get($sizeKey)->getData();
-            
-            dump($sizeKey, $newQuantity); // Ajoute ce dump pour voir ce qui est récupéré
         
             // Vérifie si le stock existe déjà
             $existingStock = null;
@@ -165,9 +162,6 @@ public function edit(ProductRepository $productRepository, int $id, Request $req
         'editForm' => $editForm->createView(),
     ]);
 }
-
-
-
 
     #[Route('/delete/{id}', name: 'admin_product_delete', methods: ['GET'])]
     public function delete(Product $product, EntityManagerInterface $em): Response

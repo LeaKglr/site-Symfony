@@ -1,15 +1,12 @@
 {% block body %}
    {{ form_start(form, {'action': path('admin_dashboard'), 'attr': {'enctype': 'multipart/form-data', 'data-turbo': 'false'}}) }}
-
-        <div class="product-container-ajout">
-            
+        <div class="product-container-ajout">         
             <div class="image-stock">
                 <label>{{ form_label(form.imageFile) }}</label>
                 <div>
                     {{ form_widget(form.imageFile) }}
                 </div>
             </div>
-
 
             <div class="form-content">
                 <div class="form-fields">
@@ -22,9 +19,7 @@
                     {{ form_row(form.stock_xl) }}
                 </div>
                 <button type="submit" class="btn-add">Ajouter</button>
-            </div>        
-            
+            </div>                   
         </div>
     {{ form_end(form) }}
-
 {% endblock %}

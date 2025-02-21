@@ -2,11 +2,8 @@
 
 {% block body %}
 
-    
-
 <div class="featured-products">
-
-<form method="get">
+    <form method="get">
         <label for="priceRange">Filtrer par prix :</label>
         <select name="priceRange" id="priceRange">
             <option value="">Tous les prix</option>
@@ -17,23 +14,22 @@
         <button type="submit">Filtrer</button>
     </form>
 
-
     {% for product in products %}
-            <div class="product-card">
-                <div class="image-container">
-                    {% if product.image %}
-                        <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
-                    {% else %}
-                        <p>Aucune image disponible</p>
-                    {% endif %}
-                </div>
-                <div class="description-product">
-                    <div class="bottom-section">
-                        <div class="name-and-price">
-                            <h3>{{ product.name }}</h3>
-                            <p>Prix : {{ product.price }} €</p>
-                        </div>
-                            <a href="{{ path('product_show', { id: product.id }) }}" class="btn-view">Voir</a>
+        <div class="product-card">
+            <div class="image-container">
+                {% if product.image %}
+                    <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.name }}">
+                {% else %}
+                    <p>Aucune image disponible</p>
+                {% endif %}
+            </div>
+            <div class="description-product">
+                <div class="bottom-section">
+                    <div class="name-and-price">
+                        <h3>{{ product.name }}</h3>
+                        <p>Prix : {{ product.price }} €</p>
+                    </div>
+                        <a href="{{ path('product_show', { id: product.id }) }}" class="btn-view">Voir</a>
                     </div>
                 </div>
             </div>

@@ -9,13 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartController extends AbstractController
-{
+{ 
+    // Affichage du panier
     #[Route('/cart', name: 'cart_show')]
     public function show(SessionInterface $session): Response
     {
         $cart = $session->get('cart', []);
 
-        // Calculer le total du panier
+        // Calcule le total du panier
         $total = array_reduce($cart, function ($sum, $item) {
             return $sum + $item['price'];
         }, 0);
@@ -33,7 +34,7 @@ final class CartController extends AbstractController
 
         if (isset($cart[$index])) {
             unset($cart[$index]);
-            $session->set('cart', array_values($cart)); // Réindexe le tableau
+            $session->set('cart', array_values($cart));
         }
 
         return $this->redirectToRoute('cart_show');

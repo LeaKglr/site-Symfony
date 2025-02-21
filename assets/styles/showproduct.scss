@@ -1,0 +1,138 @@
+// Mixins stricts
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin box($max-width, $padding, $margin: 0 auto) {
+    max-width: $max-width;
+    padding: $padding;
+    margin: $margin;
+}
+
+@mixin button-style($bg-color, $text-color, $padding, $font-size) {
+    padding: $padding;
+    font-size: $font-size;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+// Conteneur principal
+.product-container {
+    @include flex(row, center, flex-start);
+    @include box(1200px, 20px);
+}
+
+// Image du produit
+.product-image img {
+    width: 400px;
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+// Contenu principal
+.product-content {
+    @include flex(column);
+}
+
+// Informations produit
+.product-info {
+    @include flex(column, flex-start, flex-start, 20px);
+}
+
+// Détails du produit
+.product-details {
+    @include flex(column);
+}
+
+.info-and-size form {
+    @include flex(column, center, center);
+}
+
+// Prix du produit
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+// Formulaire produit
+.product-form {
+    @include flex(column, center);
+}
+
+.product-form label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-form select {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+// Bouton "Ajouter au panier"
+.add-to-cart {
+    margin-top: 20px;
+
+    .btn {
+        @include button-style(white, black, 12px 60px, 16px);
+        margin-top: 70px;
+
+        &:hover {
+            background-color: black;
+            color: white;
+        }
+    }
+}
+
+// Info et taille
+.info-and-size {
+    @include flex(row, center, center, 40px);
+}
+
+// Liens de navigation
+.navigation-links {
+    @include flex(row, space-between);
+
+    a {
+        @include button-style(white, black, 12px 80px, 16px);
+        text-decoration: none;
+        text-align: center;
+    }
+}
+
+// Media Queries pour mobile
+@media (max-width: 768px) {
+    .product-container {
+        @include flex(column, center, center);
+        padding: 10px;
+    }
+
+    .product-image img {
+        width: 100%;
+    }
+
+    .add-to-cart .btn {
+        width: 100%;
+    }
+
+    .navigation-links {
+        flex-direction: column;
+        gap: 10px;
+
+        a {
+            width: 100%;
+        }
+    }
+}
