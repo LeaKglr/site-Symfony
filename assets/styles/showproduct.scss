@@ -26,8 +26,9 @@
 
 // Conteneur principal
 .product-container {
-    @include flex(row, center, flex-start);
+    @include flex(row, center, flex-start, 10px);
     @include box(1200px, 20px);
+    margin: 10px;
 }
 
 // Image du produit
